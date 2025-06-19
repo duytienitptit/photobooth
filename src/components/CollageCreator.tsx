@@ -26,7 +26,6 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
   const collageRef = useRef<HTMLDivElement>(null);
   const [photoPositions, setPhotoPositions] = useState<string[]>(photos);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
-  const [showFrameSelector, setShowFrameSelector] = useState(false);
 
   const frames = [
     {
@@ -37,7 +36,6 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
       borderColor: 'border-pink-300',
       preview: '🐱💕🌸',
       background: 'linear-gradient(135deg, #fce7f3 0%, #fdf2f8 100%)',
-      border: '4px solid #f472b6',
       stickers: ['🐱', '🌸', '💕', '⭐', '🎀', '🦄']
     },
     {
@@ -48,7 +46,6 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
       borderColor: 'border-amber-300',
       preview: '📷🌻☀️',
       background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
-      border: '4px solid #d97706',
       stickers: ['📷', '🌻', '☀️', '🎵', '📼', '🌈']
     },
     {
@@ -59,7 +56,6 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
       borderColor: 'border-gray-300',
       preview: '✨⚪⬜',
       background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
-      border: '2px solid #64748b',
       stickers: []
     },
     {
@@ -70,8 +66,87 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
       borderColor: 'border-purple-300',
       preview: '🌈🎨🎪',
       background: 'linear-gradient(135deg, #ddd6fe 0%, #c7d2fe 100%)',
-      border: '4px solid #8b5cf6',
       stickers: ['🌈', '✨', '🎨', '🎪', '🎭', '🎊']
+    },
+    {
+      id: 'elegant' as FrameType,
+      name: 'Elegant Gold',
+      description: 'Sang trọng và lịch lãm',
+      colors: 'from-yellow-100 to-amber-100',
+      borderColor: 'border-yellow-400',
+      preview: '⭐✨🏆',
+      background: 'linear-gradient(135deg, #fefce8 0%, #fef3c7 100%)',
+      stickers: ['⭐', '✨', '🏆', '👑', '💎', '🥇']
+    },
+    {
+      id: 'cozy' as FrameType,
+      name: 'Cozy Coffee',
+      description: 'Ấm áp và thân thiện',
+      colors: 'from-orange-100 to-red-100',
+      borderColor: 'border-orange-300',
+      preview: '☕🍂🏠',
+      background: 'linear-gradient(135deg, #fed7aa 0%, #fecaca 100%)',
+      stickers: ['☕', '🍂', '🏠', '🧸', '🍪', '🕯️']
+    },
+    {
+      id: 'nature' as FrameType,
+      name: 'Nature Fresh',
+      description: 'Tự nhiên và tươi mát',
+      colors: 'from-green-100 to-emerald-100',
+      borderColor: 'border-green-300',
+      preview: '🌿🌺🦋',
+      background: 'linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%)',
+      stickers: ['🌿', '🌺', '🦋', '🌸', '🍃', '🐝']
+    },
+    {
+      id: 'party' as FrameType,
+      name: 'Party Time',
+      description: 'Vui nhộn và sôi động',
+      colors: 'from-fuchsia-200 to-cyan-200',
+      borderColor: 'border-fuchsia-300',
+      preview: '🎉🎵🎭',
+      background: 'linear-gradient(135deg, #f5d0fe 0%, #a7f3d0 100%)',
+      stickers: ['🎉', '🎵', '🎭', '🎪', '🎈', '🎊']
+    },
+    {
+      id: 'pastel' as FrameType,
+      name: 'Pastel Dream',
+      description: 'Màu pastel nhẹ nhàng',
+      colors: 'from-rose-100 to-teal-100',
+      borderColor: 'border-rose-300',
+      preview: '🌸🦋☁️',
+      background: 'linear-gradient(135deg, #fdf2f8 0%, #f0fdfa 100%)',
+      stickers: ['🌸', '🦋', '☁️', '🌙', '⭐', '🌈']
+    },
+    {
+      id: 'neon' as FrameType,
+      name: 'Neon Glow',
+      description: 'Sáng tạo và hiện đại',
+      colors: 'from-violet-200 to-pink-200',
+      borderColor: 'border-violet-300',
+      preview: '⚡🌟💫',
+      background: 'linear-gradient(135deg, #ddd6fe 0%, #fbcfe8 100%)',
+      stickers: ['⚡', '🌟', '💫', '🔥', '✨', '💥']
+    },
+    {
+      id: 'vintage' as FrameType,
+      name: 'Vintage Film',
+      description: 'Phong cách cổ điển',
+      colors: 'from-stone-200 to-amber-200',
+      borderColor: 'border-stone-300',
+      preview: '🎞️📸🍁',
+      background: 'linear-gradient(135deg, #f5f5f4 0%, #fef3c7 100%)',
+      stickers: ['🎞️', '📸', '🍁', '📷', '🎭', '🎪']
+    },
+    {
+      id: 'modern' as FrameType,
+      name: 'Modern Chic',
+      description: 'Hiện đại và thanh lịch',
+      colors: 'from-slate-100 to-blue-100',
+      borderColor: 'border-slate-300',
+      preview: '💎🔷🌟',
+      background: 'linear-gradient(135deg, #f1f5f9 0%, #dbeafe 100%)',
+      stickers: ['💎', '🔷', '🌟', '✨', '🔹', '💠']
     }
   ];
 
@@ -116,12 +191,12 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      // Set canvas size for 6-photo layout (3x2)
-      canvas.width = 1200;
-      canvas.height = 800;
+      // Set canvas size for 2x3 layout (2 columns, 3 rows)
+      canvas.width = 800;
+      canvas.height = 1200;
 
       // Draw background with frame style
-      const gradient = ctx.createLinearGradient(0, 0, 1200, 800);
+      const gradient = ctx.createLinearGradient(0, 0, 800, 1200);
       if (selectedFrame === 'cute') {
         gradient.addColorStop(0, '#fce7f3');
         gradient.addColorStop(1, '#fdf2f8');
@@ -131,17 +206,23 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
       } else if (selectedFrame === 'colorful') {
         gradient.addColorStop(0, '#ddd6fe');
         gradient.addColorStop(1, '#c7d2fe');
+      } else if (selectedFrame === 'elegant') {
+        gradient.addColorStop(0, '#fefce8');
+        gradient.addColorStop(1, '#fef3c7');
+      } else if (selectedFrame === 'pastel') {
+        gradient.addColorStop(0, '#fdf2f8');
+        gradient.addColorStop(1, '#f0fdfa');
       } else {
         gradient.addColorStop(0, '#f8fafc');
         gradient.addColorStop(1, '#e2e8f0');
       }
       ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, 1200, 800);
+      ctx.fillRect(0, 0, 800, 1200);
 
-      // Draw photos in 3x2 grid with padding
-      const photoWidth = 360;
-      const photoHeight = 240;
-      const padding = 40;
+      // Draw photos in 2x3 grid with minimal padding
+      const photoWidth = 370;
+      const photoHeight = 370;
+      const padding = 15;
       const startX = padding;
       const startY = padding;
 
@@ -152,14 +233,10 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
         
         await new Promise((resolve) => {
           img.onload = () => {
-            const col = i % 3;
-            const row = Math.floor(i / 3);
+            const col = i % 2;
+            const row = Math.floor(i / 2);
             const x = startX + col * (photoWidth + padding);
             const y = startY + row * (photoHeight + padding);
-            
-            // Draw white border around photo
-            ctx.fillStyle = 'white';
-            ctx.fillRect(x - 4, y - 4, photoWidth + 8, photoHeight + 8);
             
             ctx.drawImage(img, x, y, photoWidth, photoHeight);
             resolve(void 0);
@@ -168,30 +245,22 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
         });
       }
 
-      // Add decorative stickers around photos (like in reference image)
+      // Add decorative stickers around photos
       if (currentFrameData.stickers.length > 0) {
         ctx.font = '48px Arial';
         const stickerPositions = [
-          { x: 50, y: 100, sticker: currentFrameData.stickers[0] },
-          { x: 1100, y: 150, sticker: currentFrameData.stickers[1] },
-          { x: 100, y: 400, sticker: currentFrameData.stickers[2] },
-          { x: 1000, y: 450, sticker: currentFrameData.stickers[3] },
-          { x: 200, y: 700, sticker: currentFrameData.stickers[4] },
-          { x: 950, y: 720, sticker: currentFrameData.stickers[5] || currentFrameData.stickers[0] }
+          { x: 750, y: 100, sticker: currentFrameData.stickers[0] },
+          { x: 750, y: 500, sticker: currentFrameData.stickers[1] },
+          { x: 750, y: 900, sticker: currentFrameData.stickers[2] },
+          { x: 50, y: 300, sticker: currentFrameData.stickers[3] },
+          { x: 50, y: 700, sticker: currentFrameData.stickers[4] },
+          { x: 50, y: 1100, sticker: currentFrameData.stickers[5] || currentFrameData.stickers[0] }
         ];
 
         stickerPositions.forEach(({ x, y, sticker }) => {
           ctx.fillText(sticker, x, y);
         });
       }
-
-      // Add watermark
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-      ctx.fillRect(500, 720, 200, 60);
-      ctx.fillStyle = 'white';
-      ctx.font = 'bold 32px Arial';
-      ctx.textAlign = 'center';
-      ctx.fillText('photobooth', 600, 760);
 
       // Download
       const link = document.createElement('a');
@@ -223,22 +292,21 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
         </p>
 
         <Card className="overflow-hidden shadow-2xl">
-          <CardContent className="p-0">
+          <CardContent className="p-2">
             <div
               ref={collageRef}
               className="relative"
               style={{
                 background: currentFrameData.background,
-                border: currentFrameData.border,
                 minHeight: '600px'
               }}
             >
-              {/* 3x2 Grid Layout for 6 photos */}
-              <div className="grid grid-cols-3 grid-rows-2 gap-4 p-8 h-full">
+              {/* 2x3 Grid Layout */}
+              <div className="grid grid-cols-2 gap-1 p-2 h-full">
                 {photoPositions.slice(0, photoCount).map((photo, index) => (
                   <div
                     key={index}
-                    className="relative group cursor-move transition-all duration-300 hover:scale-105 bg-white p-1 rounded shadow-lg"
+                    className="relative group cursor-move transition-all duration-300 hover:scale-105"
                     draggable
                     onDragStart={(e) => handleDragStart(e, index)}
                     onDragOver={handleDragOver}
@@ -247,10 +315,10 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
                     <img
                       src={photo}
                       alt={`Collage photo ${index + 1}`}
-                      className="w-full h-full object-cover rounded"
+                      className="w-full h-full object-cover aspect-square"
                     />
                     
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 rounded flex items-center justify-center">
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
                       <span className="text-white opacity-0 group-hover:opacity-100 font-semibold text-sm">
                         Kéo để đổi vị trí
                       </span>
@@ -264,17 +332,17 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
                 <div className="absolute inset-0 pointer-events-none">
                   {currentFrameData.stickers.slice(0, 6).map((sticker, index) => {
                     const positions = [
-                      { top: '10%', left: '5%' },
-                      { top: '15%', right: '8%' },
-                      { top: '45%', left: '3%' },
-                      { top: '50%', right: '5%' },
-                      { bottom: '15%', left: '8%' },
-                      { bottom: '10%', right: '10%' }
+                      { top: '5%', right: '5%' },
+                      { top: '35%', right: '5%' },
+                      { top: '65%', right: '5%' },
+                      { top: '15%', left: '5%' },
+                      { top: '45%', left: '5%' },
+                      { bottom: '5%', left: '5%' }
                     ];
                     return (
                       <div
                         key={index}
-                        className="absolute text-3xl animate-bounce"
+                        className="absolute text-2xl animate-bounce"
                         style={{
                           ...positions[index],
                           animationDelay: `${index * 0.2}s`,
@@ -287,11 +355,6 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
                   })}
                 </div>
               )}
-
-              {/* Photobooth Label */}
-              <div className="absolute bottom-4 right-4 bg-black bg-opacity-60 text-white px-3 py-1 rounded text-sm font-semibold">
-                photobooth
-              </div>
             </div>
           </CardContent>
         </Card>
@@ -343,7 +406,7 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
             Chọn khung nền
           </h3>
           
-          <div className="grid grid-cols-1 gap-3">
+          <div className="grid grid-cols-1 gap-2 max-h-96 overflow-y-auto">
             {frames.map((frame) => (
               <Card 
                 key={frame.id}
@@ -352,14 +415,11 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
                 } bg-gradient-to-br ${frame.colors}`}
                 onClick={() => handleFrameSelect(frame.id)}
               >
-                <CardContent className="p-3 text-center">
-                  <div className="text-lg mb-2">{frame.preview}</div>
-                  <h4 className="text-sm font-semibold text-gray-800 mb-1">
+                <CardContent className="p-2 text-center">
+                  <div className="text-sm mb-1">{frame.preview}</div>
+                  <h4 className="text-xs font-semibold text-gray-800 mb-1">
                     {frame.name}
                   </h4>
-                  <p className="text-gray-600 text-xs mb-2">
-                    {frame.description}
-                  </p>
                   <Button 
                     className={`w-full text-xs ${
                       selectedFrame === frame.id 

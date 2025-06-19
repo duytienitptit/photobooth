@@ -4,15 +4,14 @@ import { Camera, ImageIcon, Download, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import CameraCapture from '@/components/CameraCapture';
-import FrameSelector from '@/components/FrameSelector';
 import PhotoSelector from '@/components/PhotoSelector';
 import CollageCreator from '@/components/CollageCreator';
 import { toast } from 'sonner';
 
-export type FrameType = 'cute' | 'retro' | 'minimal' | 'colorful' | 'elegant' | 'cozy' | 'nature' | 'party';
+export type FrameType = 'cute' | 'retro' | 'minimal' | 'colorful' | 'elegant' | 'cozy' | 'nature' | 'party' | 'pastel' | 'neon' | 'vintage' | 'modern';
 
 const Index = () => {
-  const [currentStep, setCurrentStep] = useState<'capture' | 'select' | 'frame' | 'collage'>('capture');
+  const [currentStep, setCurrentStep] = useState<'capture' | 'select' | 'collage'>('capture');
   const [selectedFrame, setSelectedFrame] = useState<FrameType>('cute');
   const [capturedPhotos, setCapturedPhotos] = useState<string[]>([]);
   const [selectedPhotos, setSelectedPhotos] = useState<string[]>([]);
@@ -27,14 +26,8 @@ const Index = () => {
   const handlePhotosSelected = (photos: string[], count: 4 | 6) => {
     setSelectedPhotos(photos);
     setPhotoCount(count);
-    setCurrentStep('frame');
-    toast.success(`Đã chọn ${photos.length} ảnh! Hãy chọn khung nền.`);
-  };
-
-  const handleFrameSelect = (frame: FrameType) => {
-    setSelectedFrame(frame);
     setCurrentStep('collage');
-    toast.success('Tuyệt vời! Bây giờ hãy tạo collage của bạn!');
+    toast.success(`Đã chọn ${photos.length} ảnh! Hãy tạo collage của bạn.`);
   };
 
   const handleFrameChange = (frame: FrameType) => {
@@ -73,18 +66,18 @@ const Index = () => {
         {/* Progress Indicator */}
         <div className="flex justify-center mb-8">
           <div className="flex items-center space-x-4">
-            {['capture', 'select', 'frame', 'collage'].map((step, index) => (
+            {['capture', 'select', 'collage'].map((step, index) => (
               <div key={step} className="flex items-center">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
                   currentStep === step 
                     ? 'bg-pink-500 text-white shadow-lg scale-110' 
-                    : capturedPhotos.length > 0 && index < 2 || selectedPhotos.length > 0 && index < 3 || (currentStep === 'collage' && index < 4)
+                    : capturedPhotos.length > 0 && index < 2 || selectedPhotos.length > 0 && index < 3
                     ? 'bg-green-500 text-white'
                     : 'bg-gray-200 text-gray-500'
                 }`}>
                   {index + 1}
                 </div>
-                {index < 3 && <div className="w-8 h-1 bg-gray-200 mx-2" />}
+                {index < 2 && <div className="w-8 h-1 bg-gray-200 mx-2" />}
               </div>
             ))}
           </div>
@@ -104,13 +97,6 @@ const Index = () => {
               <PhotoSelector 
                 photos={capturedPhotos}
                 onPhotosSelected={handlePhotosSelected}
-              />
-            )}
-            
-            {currentStep === 'frame' && (
-              <FrameSelector 
-                onFrameSelect={handleFrameSelect}
-                selectedFrame={selectedFrame}
               />
             )}
             
