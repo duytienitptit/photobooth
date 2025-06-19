@@ -101,3 +101,106 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom scrollbar for frame selector */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #9333ea, #db2777);
+  background-clip: content-box;
+}
+
+/* Enhanced animations */
+@keyframes wiggle {
+  0%,
+  7% {
+    transform: rotateZ(0);
+  }
+  15% {
+    transform: rotateZ(-15deg);
+  }
+  20% {
+    transform: rotateZ(10deg);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  30% {
+    transform: rotateZ(6deg);
+  }
+  35% {
+    transform: rotateZ(-4deg);
+  }
+  40%,
+  100% {
+    transform: rotateZ(0);
+  }
+}
+
+.animate-wiggle {
+  animation: wiggle 2s ease-in-out infinite;
+}
+
+/* Glow effect for selected frame */
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.8);
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Print styles for collage */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  [data-print-target],
+  [data-print-target] * {
+    visibility: visible;
+  }
+
+  [data-print-target] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    height: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Hide all buttons and controls when printing */
+  button,
+  .controls,
+  .sidebar {
+    display: none !important;
+  }
+}
+
+/* Additional responsive improvements */
+@media (max-width: 768px) {
+  .custom-scrollbar {
+    padding-right: 0;
+  }
+}
