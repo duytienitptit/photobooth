@@ -31,122 +31,168 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
     {
       id: 'cute' as FrameType,
       name: 'Cute & Kawaii',
-      description: 'Với sticker mèo con dễ thương',
-      colors: 'from-pink-200 to-rose-200',
-      borderColor: 'border-pink-300',
+      colors: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)',
+      borderColor: 'border-pink-400',
       preview: '🐱💕🌸',
-      background: 'linear-gradient(135deg, #fce7f3 0%, #fdf2f8 100%)',
-      stickers: ['🐱', '🌸', '💕', '⭐', '🎀', '🦄']
+      stickers: ['🐱', '🌸', '💕', '⭐', '🎀', '🦄'],
+      decorativeElements: [
+        { element: '💖', className: 'absolute top-4 right-4 text-3xl animate-pulse' },
+        { element: '🌸', className: 'absolute top-12 left-4 text-2xl animate-bounce' },
+        { element: '⭐', className: 'absolute bottom-8 right-8 text-2xl animate-spin' },
+        { element: '🎀', className: 'absolute bottom-4 left-8 text-2xl animate-pulse' }
+      ]
     },
     {
       id: 'retro' as FrameType,
       name: 'Retro Vintage',
-      description: 'Phong cách hoài cổ',
-      colors: 'from-amber-200 to-orange-200',
-      borderColor: 'border-amber-300',
+      colors: 'linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #e17055 100%)',
+      borderColor: 'border-orange-400',
       preview: '📷🌻☀️',
-      background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
-      stickers: ['📷', '🌻', '☀️', '🎵', '📼', '🌈']
+      stickers: ['📷', '🌻', '☀️', '🎵', '📼', '🌈'],
+      decorativeElements: [
+        { element: '🌻', className: 'absolute top-6 right-6 text-3xl' },
+        { element: '📷', className: 'absolute top-4 left-4 text-2xl' },
+        { element: '☀️', className: 'absolute bottom-6 right-4 text-3xl animate-pulse' },
+        { element: '🎵', className: 'absolute bottom-8 left-6 text-2xl' }
+      ]
     },
     {
       id: 'minimal' as FrameType,
       name: 'Minimal Clean',
-      description: 'Đơn giản và tinh tế',
-      colors: 'from-gray-100 to-slate-200',
-      borderColor: 'border-gray-300',
+      colors: 'linear-gradient(135deg, #ddd6fe 0%, #e0e7ff 50%, #f0f9ff 100%)',
+      borderColor: 'border-indigo-300',
       preview: '✨⚪⬜',
-      background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
-      stickers: []
+      stickers: [],
+      decorativeElements: [
+        { element: '✨', className: 'absolute top-4 right-4 text-2xl opacity-60' },
+        { element: '💫', className: 'absolute bottom-4 left-4 text-2xl opacity-60' }
+      ]
     },
     {
       id: 'colorful' as FrameType,
       name: 'Colorful Fun',
-      description: 'Đầy màu sắc và vui tươi',
-      colors: 'from-purple-200 to-blue-200',
-      borderColor: 'border-purple-300',
+      colors: 'linear-gradient(135deg, #a29bfe 0%, #6c5ce7 25%, #fd79a8 50%, #fdcb6e 75%, #55efc4 100%)',
+      borderColor: 'border-purple-400',
       preview: '🌈🎨🎪',
-      background: 'linear-gradient(135deg, #ddd6fe 0%, #c7d2fe 100%)',
-      stickers: ['🌈', '✨', '🎨', '🎪', '🎭', '🎊']
+      stickers: ['🌈', '✨', '🎨', '🎪', '🎭', '🎊'],
+      decorativeElements: [
+        { element: '🌈', className: 'absolute top-4 right-4 text-3xl' },
+        { element: '🎨', className: 'absolute top-12 left-4 text-2xl animate-bounce' },
+        { element: '🎪', className: 'absolute bottom-6 right-6 text-2xl' },
+        { element: '✨', className: 'absolute bottom-4 left-4 text-2xl animate-pulse' }
+      ]
     },
     {
       id: 'elegant' as FrameType,
       name: 'Elegant Gold',
-      description: 'Sang trọng và lịch lãm',
-      colors: 'from-yellow-100 to-amber-100',
-      borderColor: 'border-yellow-400',
+      colors: 'linear-gradient(135deg, #f7dc6f 0%, #f4d03f 30%, #f8c471 70%, #e74c3c 100%)',
+      borderColor: 'border-yellow-500',
       preview: '⭐✨🏆',
-      background: 'linear-gradient(135deg, #fefce8 0%, #fef3c7 100%)',
-      stickers: ['⭐', '✨', '🏆', '👑', '💎', '🥇']
+      stickers: ['⭐', '✨', '🏆', '👑', '💎', '🥇'],
+      decorativeElements: [
+        { element: '👑', className: 'absolute top-4 right-4 text-3xl animate-pulse' },
+        { element: '💎', className: 'absolute top-8 left-4 text-2xl' },
+        { element: '🏆', className: 'absolute bottom-6 right-6 text-2xl' },
+        { element: '⭐', className: 'absolute bottom-4 left-6 text-2xl animate-spin' }
+      ]
     },
     {
       id: 'cozy' as FrameType,
       name: 'Cozy Coffee',
-      description: 'Ấm áp và thân thiện',
-      colors: 'from-orange-100 to-red-100',
-      borderColor: 'border-orange-300',
+      colors: 'linear-gradient(135deg, #d63031 0%, #e17055 30%, #fdcb6e 70%, #fd79a8 100%)',
+      borderColor: 'border-red-400',
       preview: '☕🍂🏠',
-      background: 'linear-gradient(135deg, #fed7aa 0%, #fecaca 100%)',
-      stickers: ['☕', '🍂', '🏠', '🧸', '🍪', '🕯️']
+      stickers: ['☕', '🍂', '🏠', '🧸', '🍪', '🕯️'],
+      decorativeElements: [
+        { element: '☕', className: 'absolute top-4 right-4 text-3xl' },
+        { element: '🍂', className: 'absolute top-12 left-4 text-2xl animate-bounce' },
+        { element: '🏠', className: 'absolute bottom-6 right-6 text-2xl' },
+        { element: '🧸', className: 'absolute bottom-4 left-6 text-2xl' }
+      ]
     },
     {
       id: 'nature' as FrameType,
       name: 'Nature Fresh',
-      description: 'Tự nhiên và tươi mát',
-      colors: 'from-green-100 to-emerald-100',
-      borderColor: 'border-green-300',
+      colors: 'linear-gradient(135deg, #00b894 0%, #55efc4 30%, #81ecec 70%, #74b9ff 100%)',
+      borderColor: 'border-green-400',
       preview: '🌿🌺🦋',
-      background: 'linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%)',
-      stickers: ['🌿', '🌺', '🦋', '🌸', '🍃', '🐝']
+      stickers: ['🌿', '🌺', '🦋', '🌸', '🍃', '🐝'],
+      decorativeElements: [
+        { element: '🌿', className: 'absolute top-4 right-4 text-3xl animate-pulse' },
+        { element: '🦋', className: 'absolute top-8 left-4 text-2xl animate-bounce' },
+        { element: '🌺', className: 'absolute bottom-6 right-6 text-2xl' },
+        { element: '🍃', className: 'absolute bottom-4 left-6 text-2xl' }
+      ]
     },
     {
       id: 'party' as FrameType,
       name: 'Party Time',
-      description: 'Vui nhộn và sôi động',
-      colors: 'from-fuchsia-200 to-cyan-200',
-      borderColor: 'border-fuchsia-300',
+      colors: 'linear-gradient(135deg, #fd79a8 0%, #fdcb6e 25%, #e17055 50%, #6c5ce7 75%, #00b894 100%)',
+      borderColor: 'border-pink-400',
       preview: '🎉🎵🎭',
-      background: 'linear-gradient(135deg, #f5d0fe 0%, #a7f3d0 100%)',
-      stickers: ['🎉', '🎵', '🎭', '🎪', '🎈', '🎊']
+      stickers: ['🎉', '🎵', '🎭', '🎪', '🎈', '🎊'],
+      decorativeElements: [
+        { element: '🎉', className: 'absolute top-4 right-4 text-3xl animate-bounce' },
+        { element: '🎵', className: 'absolute top-12 left-4 text-2xl animate-pulse' },
+        { element: '🎭', className: 'absolute bottom-6 right-6 text-2xl' },
+        { element: '🎊', className: 'absolute bottom-4 left-6 text-2xl animate-spin' }
+      ]
     },
     {
       id: 'pastel' as FrameType,
       name: 'Pastel Dream',
-      description: 'Màu pastel nhẹ nhàng',
-      colors: 'from-rose-100 to-teal-100',
-      borderColor: 'border-rose-300',
+      colors: 'linear-gradient(135deg, #fab1a0 0%, #ffeaa7 25%, #55efc4 50%, #81ecec 75%, #a29bfe 100%)',
+      borderColor: 'border-purple-300',
       preview: '🌸🦋☁️',
-      background: 'linear-gradient(135deg, #fdf2f8 0%, #f0fdfa 100%)',
-      stickers: ['🌸', '🦋', '☁️', '🌙', '⭐', '🌈']
+      stickers: ['🌸', '🦋', '☁️', '🌙', '⭐', '🌈'],
+      decorativeElements: [
+        { element: '🌸', className: 'absolute top-4 right-4 text-2xl animate-pulse' },
+        { element: '🦋', className: 'absolute top-12 left-4 text-2xl animate-bounce' },
+        { element: '☁️', className: 'absolute bottom-6 right-6 text-2xl' },
+        { element: '🌙', className: 'absolute bottom-4 left-6 text-2xl' }
+      ]
     },
     {
       id: 'neon' as FrameType,
       name: 'Neon Glow',
-      description: 'Sáng tạo và hiện đại',
-      colors: 'from-violet-200 to-pink-200',
-      borderColor: 'border-violet-300',
+      colors: 'linear-gradient(135deg, #6c5ce7 0%, #a29bfe 25%, #fd79a8 50%, #fdcb6e 75%, #00cec9 100%)',
+      borderColor: 'border-purple-500',
       preview: '⚡🌟💫',
-      background: 'linear-gradient(135deg, #ddd6fe 0%, #fbcfe8 100%)',
-      stickers: ['⚡', '🌟', '💫', '🔥', '✨', '💥']
+      stickers: ['⚡', '🌟', '💫', '🔥', '✨', '💥'],
+      decorativeElements: [
+        { element: '⚡', className: 'absolute top-4 right-4 text-3xl animate-pulse' },
+        { element: '🌟', className: 'absolute top-8 left-4 text-2xl animate-spin' },
+        { element: '💫', className: 'absolute bottom-6 right-6 text-2xl animate-bounce' },
+        { element: '🔥', className: 'absolute bottom-4 left-6 text-2xl animate-pulse' }
+      ]
     },
     {
       id: 'vintage' as FrameType,
       name: 'Vintage Film',
-      description: 'Phong cách cổ điển',
-      colors: 'from-stone-200 to-amber-200',
-      borderColor: 'border-stone-300',
+      colors: 'linear-gradient(135deg, #636e72 0%, #b2bec3 30%, #ddd6fe 70%, #fab1a0 100%)',
+      borderColor: 'border-gray-400',
       preview: '🎞️📸🍁',
-      background: 'linear-gradient(135deg, #f5f5f4 0%, #fef3c7 100%)',
-      stickers: ['🎞️', '📸', '🍁', '📷', '🎭', '🎪']
+      stickers: ['🎞️', '📸', '🍁', '📷', '🎭', '🎪'],
+      decorativeElements: [
+        { element: '🎞️', className: 'absolute top-4 right-4 text-2xl' },
+        { element: '📸', className: 'absolute top-12 left-4 text-2xl' },
+        { element: '🍁', className: 'absolute bottom-6 right-6 text-2xl' },
+        { element: '📷', className: 'absolute bottom-4 left-6 text-2xl' }
+      ]
     },
     {
       id: 'modern' as FrameType,
       name: 'Modern Chic',
-      description: 'Hiện đại và thanh lịch',
-      colors: 'from-slate-100 to-blue-100',
-      borderColor: 'border-slate-300',
+      colors: 'linear-gradient(135deg, #74b9ff 0%, #0984e3 30%, #6c5ce7 70%, #a29bfe 100%)',
+      borderColor: 'border-blue-400',
       preview: '💎🔷🌟',
-      background: 'linear-gradient(135deg, #f1f5f9 0%, #dbeafe 100%)',
-      stickers: ['💎', '🔷', '🌟', '✨', '🔹', '💠']
+      stickers: ['💎', '🔷', '🌟', '✨', '🔹', '💠'],
+      decorativeElements: [
+        { element: '💎', className: 'absolute top-4 right-4 text-2xl animate-pulse' },
+        { element: '🔷', className: 'absolute top-12 left-4 text-2xl' },
+        { element: '🌟', className: 'absolute bottom-6 right-6 text-2xl animate-spin' },
+        { element: '✨', className: 'absolute bottom-4 left-6 text-2xl animate-bounce' }
+      ]
     }
   ];
 
@@ -195,36 +241,43 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
       canvas.width = 800;
       canvas.height = 1200;
 
-      // Draw background with frame style
+      // Create gradient background
       const gradient = ctx.createLinearGradient(0, 0, 800, 1200);
+      
+      // Apply frame-specific gradients
       if (selectedFrame === 'cute') {
-        gradient.addColorStop(0, '#fce7f3');
-        gradient.addColorStop(1, '#fdf2f8');
+        gradient.addColorStop(0, '#ff9a9e');
+        gradient.addColorStop(0.5, '#fecfef');
+        gradient.addColorStop(1, '#fecfef');
       } else if (selectedFrame === 'retro') {
-        gradient.addColorStop(0, '#fef3c7');
-        gradient.addColorStop(1, '#fde68a');
+        gradient.addColorStop(0, '#ffeaa7');
+        gradient.addColorStop(0.5, '#fab1a0');
+        gradient.addColorStop(1, '#e17055');
       } else if (selectedFrame === 'colorful') {
-        gradient.addColorStop(0, '#ddd6fe');
-        gradient.addColorStop(1, '#c7d2fe');
+        gradient.addColorStop(0, '#a29bfe');
+        gradient.addColorStop(0.25, '#6c5ce7');
+        gradient.addColorStop(0.5, '#fd79a8');
+        gradient.addColorStop(0.75, '#fdcb6e');
+        gradient.addColorStop(1, '#55efc4');
       } else if (selectedFrame === 'elegant') {
-        gradient.addColorStop(0, '#fefce8');
-        gradient.addColorStop(1, '#fef3c7');
-      } else if (selectedFrame === 'pastel') {
-        gradient.addColorStop(0, '#fdf2f8');
-        gradient.addColorStop(1, '#f0fdfa');
+        gradient.addColorStop(0, '#f7dc6f');
+        gradient.addColorStop(0.3, '#f4d03f');
+        gradient.addColorStop(0.7, '#f8c471');
+        gradient.addColorStop(1, '#e74c3c');
       } else {
-        gradient.addColorStop(0, '#f8fafc');
-        gradient.addColorStop(1, '#e2e8f0');
+        gradient.addColorStop(0, '#ddd6fe');
+        gradient.addColorStop(1, '#e0e7ff');
       }
+      
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, 800, 1200);
 
       // Draw photos in 2x3 grid with minimal padding
-      const photoWidth = 370;
-      const photoHeight = 370;
-      const padding = 15;
-      const startX = padding;
-      const startY = padding;
+      const photoWidth = 380;
+      const photoHeight = 380;
+      const padding = 10;
+      const startX = (800 - (2 * photoWidth + padding)) / 2;
+      const startY = (1200 - (3 * photoHeight + 2 * padding)) / 2;
 
       for (let i = 0; i < Math.min(photoPositions.length, photoCount); i++) {
         const photoSrc = photoPositions[i];
@@ -242,23 +295,6 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
             resolve(void 0);
           };
           img.src = photoSrc;
-        });
-      }
-
-      // Add decorative stickers around photos
-      if (currentFrameData.stickers.length > 0) {
-        ctx.font = '48px Arial';
-        const stickerPositions = [
-          { x: 750, y: 100, sticker: currentFrameData.stickers[0] },
-          { x: 750, y: 500, sticker: currentFrameData.stickers[1] },
-          { x: 750, y: 900, sticker: currentFrameData.stickers[2] },
-          { x: 50, y: 300, sticker: currentFrameData.stickers[3] },
-          { x: 50, y: 700, sticker: currentFrameData.stickers[4] },
-          { x: 50, y: 1100, sticker: currentFrameData.stickers[5] || currentFrameData.stickers[0] }
-        ];
-
-        stickerPositions.forEach(({ x, y, sticker }) => {
-          ctx.fillText(sticker, x, y);
         });
       }
 
@@ -281,9 +317,9 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="flex h-[calc(100vh-200px)]">
       {/* Main Collage Display */}
-      <div className="lg:col-span-2">
+      <div className="flex-1 pr-4">
         <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">
           Tạo Collage của bạn
         </h2>
@@ -291,22 +327,22 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
           Kéo thả ảnh để đổi vị trí hoặc chọn khung bên phải!
         </p>
 
-        <Card className="overflow-hidden shadow-2xl">
-          <CardContent className="p-2">
+        <Card className="overflow-hidden shadow-2xl h-full">
+          <CardContent className="p-4 h-full">
             <div
               ref={collageRef}
-              className="relative"
+              className="relative h-full rounded-lg overflow-hidden"
               style={{
-                background: currentFrameData.background,
+                background: currentFrameData.colors,
                 minHeight: '600px'
               }}
             >
               {/* 2x3 Grid Layout */}
-              <div className="grid grid-cols-2 gap-1 p-2 h-full">
+              <div className="grid grid-cols-2 gap-2 p-4 h-full">
                 {photoPositions.slice(0, photoCount).map((photo, index) => (
                   <div
                     key={index}
-                    className="relative group cursor-move transition-all duration-300 hover:scale-105"
+                    className="relative group cursor-move transition-all duration-300 hover:scale-105 rounded-lg overflow-hidden"
                     draggable
                     onDragStart={(e) => handleDragStart(e, index)}
                     onDragOver={handleDragOver}
@@ -315,10 +351,10 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
                     <img
                       src={photo}
                       alt={`Collage photo ${index + 1}`}
-                      className="w-full h-full object-cover aspect-square"
+                      className="w-full h-full object-cover aspect-square rounded-lg"
                     />
                     
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center rounded-lg">
                       <span className="text-white opacity-0 group-hover:opacity-100 font-semibold text-sm">
                         Kéo để đổi vị trí
                       </span>
@@ -327,34 +363,15 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
                 ))}
               </div>
 
-              {/* Decorative Stickers */}
-              {currentFrameData.stickers.length > 0 && (
-                <div className="absolute inset-0 pointer-events-none">
-                  {currentFrameData.stickers.slice(0, 6).map((sticker, index) => {
-                    const positions = [
-                      { top: '5%', right: '5%' },
-                      { top: '35%', right: '5%' },
-                      { top: '65%', right: '5%' },
-                      { top: '15%', left: '5%' },
-                      { top: '45%', left: '5%' },
-                      { bottom: '5%', left: '5%' }
-                    ];
-                    return (
-                      <div
-                        key={index}
-                        className="absolute text-2xl animate-bounce"
-                        style={{
-                          ...positions[index],
-                          animationDelay: `${index * 0.2}s`,
-                          animationDuration: '3s'
-                        }}
-                      >
-                        {sticker}
-                      </div>
-                    );
-                  })}
+              {/* Decorative Elements */}
+              {currentFrameData.decorativeElements?.map((element, index) => (
+                <div
+                  key={index}
+                  className={element.className}
+                >
+                  {element.element}
                 </div>
-              )}
+              ))}
             </div>
           </CardContent>
         </Card>
@@ -398,38 +415,51 @@ const CollageCreator: React.FC<CollageCreatorProps> = ({
         </div>
       </div>
 
-      {/* Frame Selector Sidebar */}
-      <div className="lg:col-span-1">
-        <div className="sticky top-4">
-          <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
+      {/* Frame Selector Sidebar - Full Height */}
+      <div className="w-80 pl-4">
+        <div className="h-full">
+          <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center sticky top-0 bg-white z-10 py-2">
             <Palette className="w-5 h-5 mr-2" />
             Chọn khung nền
           </h3>
           
-          <div className="grid grid-cols-1 gap-2 max-h-96 overflow-y-auto">
+          <div className="grid grid-cols-1 gap-3 h-[calc(100%-60px)] overflow-y-auto pr-2">
             {frames.map((frame) => (
               <Card 
                 key={frame.id}
-                className={`cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg border-2 ${
-                  selectedFrame === frame.id ? 'ring-4 ring-blue-400 shadow-lg' : frame.borderColor
-                } bg-gradient-to-br ${frame.colors}`}
+                className={`cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl border-3 ${
+                  selectedFrame === frame.id ? 'ring-4 ring-blue-400 shadow-xl scale-105' : frame.borderColor
+                } overflow-hidden`}
+                style={{ 
+                  background: frame.colors,
+                  minHeight: '120px'
+                }}
                 onClick={() => handleFrameSelect(frame.id)}
               >
-                <CardContent className="p-2 text-center">
-                  <div className="text-sm mb-1">{frame.preview}</div>
-                  <h4 className="text-xs font-semibold text-gray-800 mb-1">
+                <CardContent className="p-4 text-center relative">
+                  {/* Preview decorative elements */}
+                  <div className="absolute top-2 right-2 text-lg opacity-70">
+                    {frame.preview.split('').map((emoji, i) => (
+                      <span key={i} className="inline-block animate-pulse" style={{ animationDelay: `${i * 0.2}s` }}>
+                        {emoji}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <h4 className="text-sm font-bold text-gray-800 mb-2 mt-4">
                     {frame.name}
                   </h4>
+                  
                   <Button 
                     className={`w-full text-xs ${
                       selectedFrame === frame.id 
-                        ? 'bg-blue-500 text-white hover:bg-blue-600' 
-                        : 'bg-white/80 text-gray-800 hover:bg-white/90 border border-gray-300'
+                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg' 
+                        : 'bg-white/90 text-gray-800 hover:bg-white border border-gray-400'
                     }`}
                     variant={selectedFrame === frame.id ? "default" : "outline"}
                     size="sm"
                   >
-                    {selectedFrame === frame.id ? 'Đã chọn' : 'Chọn'}
+                    {selectedFrame === frame.id ? 'Đã chọn ✓' : 'Chọn khung này'}
                   </Button>
                 </CardContent>
               </Card>
