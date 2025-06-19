@@ -3,21 +3,21 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle, Circle, ArrowRight } from 'lucide-react';
-import { Checkbox } from '@/components/ui/checkbox';
 
 interface PhotoSelectorProps {
   photos: string[];
-  onPhotosSelected: (selectedPhotos: string[]) => void;
+  onPhotosSelected: (selectedPhotos: string[], photoCount: 4 | 6) => void;
 }
 
 const PhotoSelector: React.FC<PhotoSelectorProps> = ({ photos, onPhotosSelected }) => {
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
+  const [photoCount, setPhotoCount] = useState<4 | 6>(6);
 
   const togglePhotoSelection = (index: number) => {
     setSelectedIndices(prev => {
       if (prev.includes(index)) {
         return prev.filter(i => i !== index);
-      } else if (prev.length < 6) {
+      } else if (prev.length < photoCount) {
         return [...prev, index];
       }
       return prev;
@@ -26,16 +26,40 @@ const PhotoSelector: React.FC<PhotoSelectorProps> = ({ photos, onPhotosSelected 
 
   const handleNext = () => {
     const selectedPhotos = selectedIndices.map(index => photos[index]);
-    onPhotosSelected(selectedPhotos);
+    onPhotosSelected(selectedPhotos, photoCount);
   };
 
   return (
     <div className="text-center">
-      <h2 className="text-3xl font-bold text-gray-800 mb-2">
-        Chọn 6 ảnh yêu thích
+      <h2 className="text-3xl font-bold text-gray-800 mb-4">
+        Chọn ảnh yêu thích
       </h2>
+      
+      {/* Chọn số lượng ảnh */}
+      <div className="flex justify-center gap-4 mb-6">
+        <Button
+          onClick={() => {
+            setPhotoCount(4);
+            setSelectedIndices(prev => prev.slice(0, 4));
+          }}
+          variant={photoCount === 4 ? "default" : "outline"}
+          className="px-6 py-2"
+        >
+          4 ảnh
+        </Button>
+        <Button
+          onClick={() => {
+            setPhotoCount(6);
+          }}
+          variant={photoCount === 6 ? "default" : "outline"}
+          className="px-6 py-2"
+        >
+          6 ảnh
+        </Button>
+      </div>
+
       <p className="text-gray-600 mb-6">
-        Đã chọn {selectedIndices.length}/6 ảnh
+        Đã chọn {selectedIndices.length}/{photoCount} ảnh
       </p>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
@@ -46,7 +70,7 @@ const PhotoSelector: React.FC<PhotoSelectorProps> = ({ photos, onPhotosSelected 
               key={index}
               className={`cursor-pointer transition-all duration-300 hover:scale-105 ${
                 isSelected 
-                  ? 'ring-4 ring-pink-400 shadow-lg' 
+                  ? 'ring-4 ring-blue-400 shadow-lg' 
                   : 'hover:shadow-md'
               }`}
               onClick={() => togglePhotoSelection(index)}
@@ -61,7 +85,7 @@ const PhotoSelector: React.FC<PhotoSelectorProps> = ({ photos, onPhotosSelected 
                 {/* Selection Indicator */}
                 <div className="absolute top-1 right-1">
                   {isSelected ? (
-                    <CheckCircle className="w-6 h-6 text-pink-500 bg-white rounded-full" />
+                    <CheckCircle className="w-6 h-6 text-blue-500 bg-white rounded-full" />
                   ) : (
                     <Circle className="w-6 h-6 text-gray-400 bg-white bg-opacity-80 rounded-full" />
                   )}
@@ -74,7 +98,7 @@ const PhotoSelector: React.FC<PhotoSelectorProps> = ({ photos, onPhotosSelected 
 
                 {/* Selection Order */}
                 {isSelected && (
-                  <div className="absolute top-1 left-1 bg-pink-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold">
+                  <div className="absolute top-1 left-1 bg-blue-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold">
                     {selectedIndices.indexOf(index) + 1}
                   </div>
                 )}
@@ -87,21 +111,21 @@ const PhotoSelector: React.FC<PhotoSelectorProps> = ({ photos, onPhotosSelected 
       {/* Selection Status */}
       <div className="mb-6">
         <div className="flex justify-center items-center gap-2 mb-4">
-          {Array.from({ length: 6 }).map((_, index) => (
+          {Array.from({ length: photoCount }).map((_, index) => (
             <div
               key={index}
               className={`w-4 h-4 rounded-full transition-all ${
                 index < selectedIndices.length
-                  ? 'bg-pink-500 scale-110'
+                  ? 'bg-blue-500 scale-110'
                   : 'bg-gray-200'
               }`}
             />
           ))}
         </div>
         
-        {selectedIndices.length < 6 && (
+        {selectedIndices.length < photoCount && (
           <p className="text-gray-500">
-            Vui lòng chọn thêm {6 - selectedIndices.length} ảnh nữa
+            Vui lòng chọn thêm {photoCount - selectedIndices.length} ảnh nữa
           </p>
         )}
       </div>
@@ -109,11 +133,11 @@ const PhotoSelector: React.FC<PhotoSelectorProps> = ({ photos, onPhotosSelected 
       {/* Continue Button */}
       <Button
         onClick={handleNext}
-        disabled={selectedIndices.length !== 6}
+        disabled={selectedIndices.length !== photoCount}
         size="lg"
-        className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3"
+        className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3"
       >
-        Tạo Collage
+        Chọn khung nền
         <ArrowRight className="w-5 h-5 ml-2" />
       </Button>
     </div>

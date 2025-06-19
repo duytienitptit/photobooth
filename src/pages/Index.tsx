@@ -9,38 +9,45 @@ import PhotoSelector from '@/components/PhotoSelector';
 import CollageCreator from '@/components/CollageCreator';
 import { toast } from 'sonner';
 
-export type FrameType = 'cute' | 'retro' | 'minimal' | 'colorful';
+export type FrameType = 'cute' | 'retro' | 'minimal' | 'colorful' | 'elegant' | 'cozy' | 'nature' | 'party';
 
 const Index = () => {
-  const [currentStep, setCurrentStep] = useState<'frame' | 'capture' | 'select' | 'collage'>('frame');
+  const [currentStep, setCurrentStep] = useState<'capture' | 'select' | 'frame' | 'collage'>('capture');
   const [selectedFrame, setSelectedFrame] = useState<FrameType>('cute');
   const [capturedPhotos, setCapturedPhotos] = useState<string[]>([]);
   const [selectedPhotos, setSelectedPhotos] = useState<string[]>([]);
-
-  const handleFrameSelect = (frame: FrameType) => {
-    setSelectedFrame(frame);
-    setCurrentStep('capture');
-    toast.success('Khung nền đã được chọn! Sẵn sàng chụp ảnh!');
-  };
+  const [photoCount, setPhotoCount] = useState<4 | 6>(6);
 
   const handlePhotosComplete = (photos: string[]) => {
     setCapturedPhotos(photos);
     setCurrentStep('select');
-    toast.success(`Đã chụp ${photos.length} ảnh! Hãy chọn 6 ảnh yêu thích.`);
+    toast.success(`Đã chụp ${photos.length} ảnh! Hãy chọn ảnh yêu thích.`);
   };
 
-  const handlePhotosSelected = (photos: string[]) => {
-    if (photos.length !== 6) {
-      toast.error('Vui lòng chọn đúng 6 ảnh!');
-      return;
-    }
+  const handlePhotosSelected = (photos: string[], count: 4 | 6) => {
     setSelectedPhotos(photos);
+    setPhotoCount(count);
+    setCurrentStep('frame');
+    toast.success(`Đã chọn ${photos.length} ảnh! Hãy chọn khung nền.`);
+  };
+
+  const handleFrameSelect = (frame: FrameType) => {
+    setSelectedFrame(frame);
     setCurrentStep('collage');
     toast.success('Tuyệt vời! Bây giờ hãy tạo collage của bạn!');
   };
 
+  const handleFrameChange = (frame: FrameType) => {
+    setSelectedFrame(frame);
+  };
+
+  const handleBackToPhotoSelect = () => {
+    setCurrentStep('select');
+    toast.info('Quay lại chọn ảnh!');
+  };
+
   const handleRestart = () => {
-    setCurrentStep('frame');
+    setCurrentStep('capture');
     setCapturedPhotos([]);
     setSelectedPhotos([]);
     toast.info('Bắt đầu lại từ đầu!');
@@ -59,19 +66,19 @@ const Index = () => {
             <Sparkles className="w-8 h-8 text-purple-500" />
           </div>
           <p className="text-gray-600 text-lg">
-            Chụp 10 ảnh, chọn 6 ảnh yêu thích và tạo collage tuyệt đẹp!
+            Chụp 10 ảnh, chọn 4-6 ảnh yêu thích và tạo collage với khung đẹp!
           </p>
         </div>
 
         {/* Progress Indicator */}
         <div className="flex justify-center mb-8">
           <div className="flex items-center space-x-4">
-            {['frame', 'capture', 'select', 'collage'].map((step, index) => (
+            {['capture', 'select', 'frame', 'collage'].map((step, index) => (
               <div key={step} className="flex items-center">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
                   currentStep === step 
                     ? 'bg-pink-500 text-white shadow-lg scale-110' 
-                    : capturedPhotos.length > 0 && index < 2 || selectedPhotos.length > 0 && index < 3
+                    : capturedPhotos.length > 0 && index < 2 || selectedPhotos.length > 0 && index < 3 || (currentStep === 'collage' && index < 4)
                     ? 'bg-green-500 text-white'
                     : 'bg-gray-200 text-gray-500'
                 }`}>
@@ -84,12 +91,8 @@ const Index = () => {
         </div>
 
         {/* Main Content */}
-        <Card className="max-w-4xl mx-auto shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
+        <Card className="max-w-6xl mx-auto shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
           <CardContent className="p-8">
-            {currentStep === 'frame' && (
-              <FrameSelector onFrameSelect={handleFrameSelect} />
-            )}
-            
             {currentStep === 'capture' && (
               <CameraCapture 
                 selectedFrame={selectedFrame}
@@ -104,18 +107,28 @@ const Index = () => {
               />
             )}
             
+            {currentStep === 'frame' && (
+              <FrameSelector 
+                onFrameSelect={handleFrameSelect}
+                selectedFrame={selectedFrame}
+              />
+            )}
+            
             {currentStep === 'collage' && (
               <CollageCreator 
                 photos={selectedPhotos}
                 selectedFrame={selectedFrame}
+                photoCount={photoCount}
                 onRestart={handleRestart}
+                onFrameChange={handleFrameChange}
+                onBackToPhotoSelect={handleBackToPhotoSelect}
               />
             )}
           </CardContent>
         </Card>
 
         {/* Restart Button */}
-        {currentStep !== 'frame' && (
+        {currentStep !== 'capture' && (
           <div className="text-center mt-6">
             <Button 
               onClick={handleRestart}
