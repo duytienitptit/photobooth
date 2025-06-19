@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Camera, RotateCcw, CheckCircle } from 'lucide-react';
+import { Camera, RotateCcw, CheckCircle, Timer, MousePointer } from 'lucide-react';
 import { FrameType } from '@/pages/Index';
 import { toast } from 'sonner';
 
@@ -20,6 +20,7 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ selectedFrame, onComplete
   const [countdown, setCountdown] = useState(0);
   const [capturedPhotos, setCapturedPhotos] = useState<string[]>([]);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const [captureMode, setCaptureMode] = useState<'auto' | 'manual'>('auto');
 
   useEffect(() => {
     startCamera();
@@ -55,7 +56,6 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ selectedFrame, onComplete
   };
 
   const playBeepSound = () => {
-    // Create a simple beep sound using Web Audio API
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
@@ -93,6 +93,14 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ selectedFrame, onComplete
     }, 1000);
   };
 
+  const capturePhotoManual = () => {
+    if (isCapturing) return;
+    setIsCapturing(true);
+    setTimeout(() => {
+      capturePhoto();
+    }, 100);
+  };
+
   const capturePhoto = () => {
     if (!videoRef.current || !canvasRef.current) return;
 
@@ -102,17 +110,12 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ selectedFrame, onComplete
 
     if (!ctx) return;
 
-    // Set canvas size to match video
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
-    // Draw the video frame to canvas
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    // Add frame overlay based on selected frame
     addFrameOverlay(ctx, canvas.width, canvas.height);
 
-    // Convert to data URL
     const photoDataUrl = canvas.toDataURL('image/png');
     
     const newPhotos = [...capturedPhotos, photoDataUrl];
@@ -131,10 +134,8 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ selectedFrame, onComplete
   };
 
   const addFrameOverlay = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
-    // Add different frame styles based on selected frame
     switch (selectedFrame) {
       case 'cute':
-        // Pink gradient border
         const gradient = ctx.createLinearGradient(0, 0, width, height);
         gradient.addColorStop(0, 'rgba(255, 182, 193, 0.3)');
         gradient.addColorStop(1, 'rgba(255, 105, 180, 0.3)');
@@ -146,7 +147,6 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ selectedFrame, onComplete
         break;
       
       case 'retro':
-        // Vintage sepia effect
         ctx.globalCompositeOperation = 'multiply';
         ctx.fillStyle = 'rgba(240, 230, 140, 0.2)';
         ctx.fillRect(0, 0, width, height);
@@ -154,14 +154,12 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ selectedFrame, onComplete
         break;
       
       case 'minimal':
-        // Simple thin border
         ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
         ctx.lineWidth = 2;
         ctx.strokeRect(0, 0, width, height);
         break;
       
       case 'colorful':
-        // Rainbow border
         const colors = ['#ff0000', '#ff8000', '#ffff00', '#00ff00', '#0000ff', '#8000ff'];
         for (let i = 0; i < colors.length; i++) {
           ctx.strokeStyle = colors[i];
@@ -179,13 +177,32 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ selectedFrame, onComplete
       </h2>
       <p className="text-gray-600 mb-6">
         {capturedPhotos.length < 10 
-          ? `Ảnh ${capturedPhotos.length + 1}/10 - Nhấn "Chụp ảnh" để bắt đầu đếm ngược!`
+          ? `Ảnh ${capturedPhotos.length + 1}/10 - Chọn chế độ chụp và bắt đầu!`
           : 'Hoàn thành! Đang chuyển sang bước tiếp theo...'
         }
       </p>
 
+      {/* Capture Mode Selector */}
+      <div className="flex justify-center gap-4 mb-6">
+        <Button
+          onClick={() => setCaptureMode('auto')}
+          variant={captureMode === 'auto' ? "default" : "outline"}
+          className="px-6 py-2"
+        >
+          <Timer className="w-4 h-4 mr-2" />
+          Tự động (10s)
+        </Button>
+        <Button
+          onClick={() => setCaptureMode('manual')}
+          variant={captureMode === 'manual' ? "default" : "outline"}
+          className="px-6 py-2"
+        >
+          <MousePointer className="w-4 h-4 mr-2" />
+          Thủ công
+        </Button>
+      </div>
+
       <div className="relative max-w-2xl mx-auto mb-6">
-        {/* Camera Preview */}
         <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
           <video
             ref={videoRef}
@@ -195,7 +212,6 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ selectedFrame, onComplete
             className="w-full h-auto"
           />
           
-          {/* Countdown Overlay */}
           {countdown > 0 && (
             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
               <div className="text-8xl font-bold text-white animate-pulse">
@@ -204,27 +220,37 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ selectedFrame, onComplete
             </div>
           )}
 
-          {/* Capturing Flash Effect */}
           {isCapturing && countdown === 0 && (
             <div className="absolute inset-0 bg-white animate-ping" />
           )}
         </div>
 
-        {/* Hidden Canvas for Capture */}
         <canvas ref={canvasRef} className="hidden" />
       </div>
 
       {/* Controls */}
       <div className="flex justify-center gap-4 mb-8">
-        <Button
-          onClick={startCountdown}
-          disabled={isCapturing || capturedPhotos.length >= 10}
-          size="lg"
-          className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3"
-        >
-          <Camera className="w-5 h-5 mr-2" />
-          {isCapturing ? `${countdown}s` : 'Chụp ảnh'}
-        </Button>
+        {captureMode === 'auto' ? (
+          <Button
+            onClick={startCountdown}
+            disabled={isCapturing || capturedPhotos.length >= 10}
+            size="lg"
+            className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3"
+          >
+            <Camera className="w-5 h-5 mr-2" />
+            {isCapturing && countdown > 0 ? `${countdown}s` : 'Chụp tự động'}
+          </Button>
+        ) : (
+          <Button
+            onClick={capturePhotoManual}
+            disabled={isCapturing || capturedPhotos.length >= 10}
+            size="lg"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3"
+          >
+            <Camera className="w-5 h-5 mr-2" />
+            {isCapturing ? 'Đang chụp...' : 'Chụp ngay'}
+          </Button>
+        )}
         
         <Button
           onClick={startCamera}
@@ -250,7 +276,6 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ selectedFrame, onComplete
               <CheckCircle className="absolute -top-1 -right-1 w-5 h-5 text-green-500 bg-white rounded-full" />
             </div>
           ))}
-          {/* Empty slots */}
           {Array.from({ length: 10 - capturedPhotos.length }).map((_, index) => (
             <div key={`empty-${index}`} className="w-full h-20 bg-gray-200 rounded border-2 border-dashed border-gray-300 flex items-center justify-center">
               <span className="text-gray-400 text-sm">{capturedPhotos.length + index + 1}</span>
